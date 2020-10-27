@@ -1,24 +1,30 @@
-package edu.cnm.deepdive.model.cards;
+package edu.cnm.deepdive.cards.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.stream.Stream;
 
-public class Wash implements  Iterable<Card> {
+public abstract class Wash implements  Iterable<Card> {
 
   private final List<Card> cards;
 
-public Wash(){
+protected Wash(){
   cards = new ArrayList<>();
 }
  public void add (Card card) {
   cards.add(card);
  }
 
- public Card draw (Card card) {
-  return cards.remove(0);
+ public Card draw () throws NoSuchElementException {
+   try {
+     return cards.remove(0);
+   } catch (IndexOutOfBoundsException e) {
+     throw new NoSuchElementException();
+   }
  }
 
  public void sort () {
@@ -43,7 +49,16 @@ public Wash(){
   return cards.size();
   }
 
+  public boolean isEmpty(){
+   return cards.isEmpty();
+  }
+
+  public Stream<Card> stream() {
+  return cards.stream();
+  }
+
   protected List<Card> getCards() {
     return cards;
   }
+
 }

@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.model.cards;
+package edu.cnm.deepdive.cards.model;
 
 public enum Rank {
 
